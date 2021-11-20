@@ -11,13 +11,12 @@ function Home() {
 
   const {user,setUser} = useContext(MyContext)
 
- /*   useEffect(()=>{
-      const unsubscribe= onAuthStateChanged(auth)
-      .then(credential=>{
-        setUser(credential.user)
-      })
-      return unsubscribe
-  },[])  */
+   useEffect(()=>{
+     let local = JSON.parse(localStorage.getItem("user"))
+     if(local){
+       setUser(local)
+     }
+  },[]) 
 
 
   return (
