@@ -11,6 +11,7 @@ import {
   orderBy,
   query,
   doc,
+  getDoc,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -25,7 +26,7 @@ import "./ChatBoard.css";
 import app from "./firebaseAuthentication/firebaseConfig";
 
 export default function ChatBoard() {
-  const { messages, setMessages, user } = useContext(MyContext);
+  const { messages, setMessages, user ,setUser} = useContext(MyContext);
   const [emoji, setEmoji] = useState(false);
   const boxRef= useRef()
   const inp = useRef();
@@ -54,7 +55,6 @@ export default function ChatBoard() {
       setMessages(msjs);
     });
 
-  
 
     // Stop listening to changes
     return unsubscribe;
@@ -74,9 +74,9 @@ export default function ChatBoard() {
     /*   const sent = await setDoc(doc(db,"messages"),message) */
     // Add a new document with a generated id.
     const sent = await addDoc(collection(db, "messages"), message);
-    console.log(user, "this is my user")
-    const updateUser = await setDoc(doc(db, `users`,user.uid), {...user,messages:[...user.messages,sent.id]});
-
+    await setDoc(doc(db, `users`,user.uid), {...user,messages:[...user.messages,{...message,id:sent.id}]});
+    const updatedUser= await getDoc(doc(db,"users",user.uid))
+    setUser(updatedUser.data())
     console.log(message);
     e.target.reset();
     boxRef.current.scrollIntoView({behavior: "smooth"})
@@ -129,6 +129,9 @@ export default function ChatBoard() {
             uid:user.uid
           };
           const sent = await addDoc(collection(db, "messages"), message);
+          await setDoc(doc(db, `users`,user.uid), {...user,uploads:[...user.uploads,{...message,id:sent.id}]});
+          const updatedUser= await getDoc(doc(db,"users",user.uid))
+           setUser(updatedUser.data())
         });
       }
     );
