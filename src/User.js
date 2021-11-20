@@ -1,8 +1,18 @@
 import React, { useContext } from 'react'
 import { MyContext } from './context/MyConext'
+import {signOut,getAuth} from "firebase/auth"
 import "./User.css"
+import { useNavigate } from 'react-router-dom'
 export default function User() {
-    const {user}=useContext(MyContext)
+    const {user,setUser}=useContext(MyContext)
+    const auth = getAuth()
+    const navigate= useNavigate()
+    const LogOut=()=>{
+        signOut(auth).then(()=>{
+            navigate("/")
+            setUser(null)
+        })
+    }
     return (
         <div className="container d-flex justify-content-center align-items-center">
         <div className="card1">
@@ -20,7 +30,7 @@ export default function User() {
                         <h6 className="mb-0">uploaded files</h6> <span>12</span>
                     </div>
                     <div className="stats">
-                        <button className="btn btn-primary">LogOut</button>
+                        <button className="btn btn-primary" onClick={LogOut}>LogOut</button>
                     </div>
                 </div>
             </div>
