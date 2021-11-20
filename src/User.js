@@ -10,6 +10,7 @@ export default function User() {
     const LogOut=()=>{
         signOut(auth).then(()=>{
             navigate("/")
+            localStorage.removeItem("user")
             setUser(null)
         })
     }
