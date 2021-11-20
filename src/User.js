@@ -3,12 +3,15 @@ import { MyContext } from './context/MyConext'
 import {signOut,getAuth} from "firebase/auth"
 import "./User.css"
 import { Navigate, useNavigate } from 'react-router-dom'
+import { doc, setDoc ,getFirestore} from 'firebase/firestore'
+const db= getFirestore()
 export default function User() {
     const {user,setUser}=useContext(MyContext)
     const auth = getAuth()
     const navigate= useNavigate()
     const LogOut=()=>{
-        signOut(auth).then(()=>{
+        signOut(auth).then(async ()=>{
+            await setDoc(doc(db, `users`,user.uid), {...user,online:0});
             navigate("/")
             localStorage.removeItem("user")
             setUser(null)

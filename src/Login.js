@@ -41,10 +41,12 @@ export default function Login({ auth }) {
        
         let {user}=credential
         const updatedUser= await getDoc(doc(db,"users",user.uid))
-    
+        
         if(updatedUser.data()){
-          setUser(updatedUser.data())
-          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+          
+          await setDoc(doc(db, `users`,user.uid), {...updatedUser.data(),online:1});
+          setUser({...updatedUser.data(),online:1})
+          localStorage.setItem("user",JSON.stringify({...updatedUser.data(),online:1}) )
         }else{
            let newUser={
           displayName:user.displayName,
@@ -75,8 +77,9 @@ export default function Login({ auth }) {
         const updatedUser= await getDoc(doc(db,"users",user.uid))
         
         if(updatedUser.data()){
-          setUser(updatedUser.data())
-          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+          await setDoc(doc(db, `users`,user.uid), {...updatedUser.data(),online:1});
+          setUser({...updatedUser.data(),online:1})
+          localStorage.setItem("user",JSON.stringify({...updatedUser.data(),online:1}) )
         }else{
            let newUser={
           displayName:user.displayName,
@@ -103,8 +106,9 @@ export default function Login({ auth }) {
        const updatedUser= await getDoc(doc(db,"users",user.uid))
         
         if(updatedUser.data()){
-          setUser(updatedUser.data())
-          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+          await setDoc(doc(db, `users`,user.uid), {...updatedUser.data(),online:1});
+          setUser({...updatedUser.data(),online:1})
+          localStorage.setItem("user",JSON.stringify({...updatedUser.data(),online:1}) )
         }else{
            let newUser={
           displayName:user.displayName,
