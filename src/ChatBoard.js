@@ -86,7 +86,8 @@ export default function ChatBoard() {
   };
 }
   const uploadImage = (e) => {
-    const storageRef = ref(storage, "images");
+    console.log(e.target.files[0])
+    const storageRef = ref(storage, `images/${e.target.files[0].name}`);
     const metadata = {
       contentType: "image/jpeg",
     };
@@ -181,7 +182,13 @@ export default function ChatBoard() {
             />
           )}
         </div>
-        <input type="submit" value="send" />
+        <label>
+          <img src="https://icon-library.com/images/send-message-icon-png/send-message-icon-png-10.jpg" 
+          width="70"
+          alt="" />
+          <input type="submit" style={{display:"none"}} />
+        </label>
+        
       </form>
     </div>
   );
