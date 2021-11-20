@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+import toast ,{Toaster} from "react-hot-toast"
 import {
   collection,
   addDoc,
@@ -97,14 +98,24 @@ export default function ChatBoard() {
       e.target.files[0],
       metadata
     );
-
+    
+    toast.promise(
+      new Promise((resolve,reject)=>{
+          resolve()
+      }),
+       {
+         loading: 'sending file...',
+         success: <b>Image sent!</b>,
+         error: <b>Could not save.</b>,
+       }
+     );
     uploadFile.on(
       "state.changed",
       (snapshot) => {
         // Observe state change events such as progress, pause, and resume
         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
         const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log("Upload is " + progress + "% done");
         switch (snapshot.state) {
           case "paused":
@@ -145,6 +156,7 @@ export default function ChatBoard() {
 
   return (
     <div className="main">
+      <div><Toaster/></div>
       <div className="chatpanel">
         <div className="messagebox" style={{ color: "white" }}>
           <Messages />
