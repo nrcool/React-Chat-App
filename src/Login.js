@@ -38,8 +38,15 @@ export default function Login({ auth }) {
   const LoginGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then(async (credential) => {
+       
         let {user}=credential
-        let newUser={
+        const updatedUser= await getDoc(doc(db,"users",user.uid))
+    
+        if(updatedUser.data()){
+          setUser(updatedUser.data())
+          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+        }else{
+           let newUser={
           displayName:user.displayName,
           email:user.email,
           uid:user.uid,
@@ -52,6 +59,8 @@ export default function Login({ auth }) {
        
         setUser(newUser);
         localStorage.setItem("user",JSON.stringify(newUser) )
+        }
+       
       })
       .catch((err) => {
         console.log(err.message)
@@ -63,7 +72,13 @@ export default function Login({ auth }) {
     signInWithPopup(auth, githubProvider)
       .then(async (credential) => {
         let {user}=credential
-        let newUser={
+        const updatedUser= await getDoc(doc(db,"users",user.uid))
+        
+        if(updatedUser.data()){
+          setUser(updatedUser.data())
+          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+        }else{
+           let newUser={
           displayName:user.displayName,
           email:user.email,
           uid:user.uid,
@@ -75,15 +90,39 @@ export default function Login({ auth }) {
         const sent = await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
-       localStorage.setItems("user",JSON.stringify(newUser))
+        localStorage.setItem("user",JSON.stringify(newUser) )
+        }
       })
       .catch((err) => setError(err.message));
   };
   const loginSubmit = (e) => {
     signInWithEmailAndPassword(auth,e.target.email.value,e.target.password.value)
-    .then( credential=>{
-      localStorage.setItem("user",JSON.stringify(credential.user))
-        setUser(credential.user)})
+    .then( async credential=>{
+      const {user}= credential;
+
+       const updatedUser= await getDoc(doc(db,"users",user.uid))
+        
+        if(updatedUser.data()){
+          setUser(updatedUser.data())
+          localStorage.setItem("user",JSON.stringify(updatedUser.data()) )
+        }else{
+           let newUser={
+          displayName:user.displayName,
+          email:user.email,
+          uid:user.uid,
+          photoURL:user.photoURL,
+          online:1,
+          messages:[],
+          uploads:[]
+        }
+        const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+       
+        setUser(newUser);
+        localStorage.setItem("user",JSON.stringify(newUser) )
+        }
+      
+      
+      })
     
     .catch(err=>{
         console.log(err)
