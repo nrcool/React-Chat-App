@@ -22,6 +22,7 @@ import {
 } from "firebase/storage";
 import { MyContext } from "./context/MyConext";
 import Messages from "./Messages";
+import Users from "./Users.js"
 import "./ChatBoard.css";
 import app from "./firebaseAuthentication/firebaseConfig";
 
@@ -53,6 +54,7 @@ export default function ChatBoard() {
         return doc.data();
       });
       setMessages(msjs);
+      boxRef.current.scrollIntoView({behavior: "smooth"})
     });
 
 
@@ -62,7 +64,7 @@ export default function ChatBoard() {
 
   const sendMessage = async (e) => {
     e.preventDefault();
-    console.log("woring");
+    if(e.target.message.value.trim()!==""){
     let message = {
       uid: user.uid,
       text: e.target.message.value,
@@ -76,12 +78,13 @@ export default function ChatBoard() {
     const sent = await addDoc(collection(db, "messages"), message);
     await setDoc(doc(db, `users`,user.uid), {...user,messages:[...user.messages,{...message,id:sent.id}]});
     const updatedUser= await getDoc(doc(db,"users",user.uid))
+    localStorage.setItem("user",JSON.stringify(updatedUser.data()))
     setUser(updatedUser.data())
     console.log(message);
     e.target.reset();
     boxRef.current.scrollIntoView({behavior: "smooth"})
   };
-
+}
   const uploadImage = (e) => {
     const storageRef = ref(storage, "images");
     const metadata = {
@@ -131,7 +134,9 @@ export default function ChatBoard() {
           const sent = await addDoc(collection(db, "messages"), message);
           await setDoc(doc(db, `users`,user.uid), {...user,uploads:[...user.uploads,{...message,id:sent.id}]});
           const updatedUser= await getDoc(doc(db,"users",user.uid))
-           setUser(updatedUser.data())
+          localStorage.setItem("user",JSON.stringify(updatedUser.data())) 
+          setUser(updatedUser.data())
+           boxRef.current.scrollIntoView({behavior: "smooth"})
         });
       }
     );
@@ -145,7 +150,7 @@ export default function ChatBoard() {
           <span ref={boxRef}></span>
         </div>
         <div className="user-online" style={{ color: "white" }}>
-          users list
+          <Users/>
         </div>
       </div>
 
@@ -170,6 +175,7 @@ export default function ChatBoard() {
               onClick={(emoji) => {
                 inp.current.value += emoji.native;
                 inp.current.focus();
+                setEmoji(!emoji)
               }}
               style={{ position: "absolute", bottom: "35px", left: "20px" }}
             />
