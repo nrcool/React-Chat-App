@@ -28,11 +28,13 @@ import {BsQuestionCircle ,BsHandThumbsUp} from "react-icons/bs"
 import app from "./firebaseAuthentication/firebaseConfig";
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
+
 export default function Login({ auth }) {
   const [error, setError] = useState("");
   const { user, setUser, register, setRegister } = useContext(MyContext);
   const db = getFirestore(app)
 
+ 
   const LoginGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then(async (credential) => {
@@ -49,6 +51,7 @@ export default function Login({ auth }) {
         const sent = await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
+        localStorage.setItem("user",JSON.stringify(newUser) )
       })
       .catch((err) => {
         console.log(err.message)
@@ -72,13 +75,16 @@ export default function Login({ auth }) {
         const sent = await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
+       localStorage.setItems("user",JSON.stringify(newUser))
       })
       .catch((err) => setError(err.message));
   };
   const loginSubmit = (e) => {
     signInWithEmailAndPassword(auth,e.target.email.value,e.target.password.value)
     .then( credential=>{
+      localStorage.setItem("user",JSON.stringify(credential.user))
         setUser(credential.user)})
+    
     .catch(err=>{
         console.log(err)
         e.target.reset() 
@@ -99,6 +105,7 @@ export default function Login({ auth }) {
           uploads:[]
         }
         const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+        window.localStorage.setItem("user",newUser)
           setUser(newUser)})
       .catch(err=>{
         console.log(err) 
