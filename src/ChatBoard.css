@@ -1,0 +1,56 @@
+.main{
+   /*  background-color: green; */
+    border: 2px solid white;
+    width: 100vw;
+}
+.chatpanel{
+    display: flex;
+    height: 82vh;
+    overflow-y: hidden;
+    border: 2px solid white;
+}
+.messagebox{
+    width: 70%;
+    overflow-y: auto;
+    border: 2px solid white;
+    padding-bottom: 50px;
+}
+.user-online{
+    width: 30%;
+    overflow-y: auto;
+    border: 2px solid white;
+}
+
+.main>form{
+    width: 100%;
+    padding: 10px;
+}
+.main>form>input{
+    font-size: 20px;
+}
+.main>form>input[type="text"]{
+    width:70%;
+    padding: 5px;
+    border-radius: 5px;
+}
+.main>form>input[type="submit"]{
+    width:20%;
+    padding: 5px;
+}
+
+.main>form>.emoji-holder{
+    position: relative;
+    display: inline;
+}
+.main>form>.emoji-holder>span{
+        padding: 3px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 26px;
+}
+.main>form>.emoji-holder>label>span{
+    padding: 3px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 26px;
+}
