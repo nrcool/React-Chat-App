@@ -4,17 +4,23 @@
     text-align: center;
 
 }
-.online-user{
+.online-user,.offline-user{
     display: flex;
-    border: 2px solid white;
+    border: 4px solid rgb(130, 255, 46);
     border-radius: 20px;
     margin: 2px;
     align-items: center;
+
+  
 }
-.online-user-image{
+.online-user-image, .offline-user-image{
     display: block;
     width: 60px;
     height: 50px;
     border-radius: 50%;
     padding: 0 10px 0 0;
+    position: relative;
+}
+.offline-user{
+    filter: grayscale(80%);
 }
