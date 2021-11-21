@@ -190,13 +190,13 @@ export default function ChatBoard() {
                 inp.current.focus();
                 setEmoji(!emoji)
               }}
-              style={{ position: "absolute", bottom: "35px", left: "20px" }}
+              style={{ position: "absolute", bottom: "30px", left: "-340px" }}
             />
           )}
         </div>
         <label>
           <img src="https://icon-library.com/images/send-message-icon-png/send-message-icon-png-10.jpg" 
-          width="70"
+          width="45"
           alt="" />
           <input type="submit" style={{display:"none"}} />
         </label>
