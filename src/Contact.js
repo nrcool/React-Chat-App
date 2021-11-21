@@ -69,10 +69,13 @@ function Contact() {
             </div>
             <div className="col-lg-4 bg-image" style={{backgroundImage:"url(https://www.wrappixel.com/demos/ui-kit/wrapkit/assets/images/contact/1.jpg)"}}>
               <div className="detail-box p-4">
+                <h3 className="text-white font-weight-light mb-3">&#x00A9;Naqvi (Full Stack Developer) </h3>
                 <h5 className="text-white font-weight-light mb-3">ADDRESS</h5>
                 <p className="text-white op-7">Berlin, Germany</p>       
-                <h5 className="text-white font-weight-light mb-3 mt-4">CALL US</h5>
-                <p className="text-white op-7">0123123123</p>
+                <h5 className="text-white font-weight-light mb-3 mt-4">Contact Me</h5>
+                <p className="text-white op-7">
+                      &#x1F4DE; +49 1778538629
+                </p>
               </div>
             </div>
           </div>
