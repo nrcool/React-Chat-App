@@ -1,5 +1,6 @@
 
 import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
 import fire from "./firebaseAuthentication/firebaseConfig"
 import Header from "./Header";

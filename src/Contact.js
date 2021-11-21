@@ -1,7 +1,6 @@
 
 import React, { useRef } from 'react';
 import "./Contact.css"
-import "bootstrap/dist/css/bootstrap.min.css"
 import { init,sendForm } from 'emailjs-com';
 
 import toast, { Toaster } from 'react-hot-toast';
