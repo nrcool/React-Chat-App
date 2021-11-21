@@ -1,5 +1,5 @@
-.main{
-   /*  background-color: green; */
+ .main{
+ 
     border: 2px solid white;
     width: 100vw;
 }
@@ -10,13 +10,15 @@
     border: 2px solid white;
 }
 .messagebox{
-    width: 70%;
+    width: 80%;
     overflow-y: auto;
     border: 2px solid white;
     padding-bottom: 50px;
 }
 .user-online{
-    width: 30%;
+    width: 20%;
+    min-width: 150px;
+    padding: 10px;
     overflow-y: auto;
     border: 2px solid white;
 }
@@ -29,7 +31,7 @@
     font-size: 20px;
 }
 .main>form>input[type="text"]{
-    width:70%;
+    min-width:85%;
     padding: 5px;
     border-radius: 5px;
 }
@@ -53,4 +55,27 @@
     text-align: center;
     cursor: pointer;
     font-size: 26px;
+} 
+ 
+@media screen and (max-width : 880px) {
+    .main>form>input[type="text"]{
+        min-width:75%;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .chatpanel{
+        height: 78vh;
+    }
+}
+@media screen and (max-width : 680px) {
+    .main>form>input[type="text"]{
+        min-width:55%;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .chatpanel{
+        height: 78vh;
+
+    }
 }
