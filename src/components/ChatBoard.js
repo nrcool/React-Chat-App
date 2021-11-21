@@ -17,18 +17,17 @@ import {
 import {
   getStorage,
   ref,
-  uploadBytes,
   getDownloadURL,
   uploadBytesResumable
 } from "firebase/storage";
-import { MyContext } from "./context/MyConext";
+import { MyContext } from "../context/MyConext";
 import Messages from "./Messages";
 import Users from "./Users.js"
 import "./ChatBoard.css";
-import app from "./firebaseAuthentication/firebaseConfig";
+import app from "../firebaseAuthentication/firebaseConfig";
 
 export default function ChatBoard() {
-  const { messages, setMessages, user ,setUser} = useContext(MyContext);
+  const {setMessages, user ,setUser} = useContext(MyContext);
   const [emoji, setEmoji] = useState(false);
   const boxRef= useRef()
   const inp = useRef();
@@ -123,6 +122,8 @@ export default function ChatBoard() {
             break;
           case "running":
             console.log("Upload is running");
+            break;
+          default:
             break;
         }
       },

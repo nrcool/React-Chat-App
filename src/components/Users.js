@@ -1,20 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import {
   collection,
-  addDoc,
-  getDocs,
-  setDoc,
   getFirestore,
   onSnapshot,
-  Timestamp,
   orderBy,
-  query,
-  doc,
-  getDoc,
+  query
 } from "firebase/firestore";
-import toast from "react-hot-toast";
 import "./Users.css"
-import { MyContext } from "./context/MyConext";
+import { MyContext } from "../context/MyConext";
 const db = getFirestore();
 
 export default function Users() {

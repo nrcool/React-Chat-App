@@ -2,14 +2,14 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./App.css"
-import fire from "./firebaseAuthentication/firebaseConfig"
+import "../firebaseAuthentication/firebaseConfig"
 import Header from "./Header";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import User from "./User"
 import Home from "./Home";
 import Contact from "./Contact";
 import ChatBoard from "./ChatBoard";
-import Container from "./context/Container";
+import Container from "../context/Container";
 
 function App() {
   return (

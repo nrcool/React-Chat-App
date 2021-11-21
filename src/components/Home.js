@@ -2,8 +2,8 @@
 import React, { useContext, useEffect } from 'react';
 import Login from "./Login"
 import ChatBoard from "./ChatBoard"
-import { MyContext } from './context/MyConext';
-import {onAuthStateChanged, getAuth} from "firebase/auth"
+import { MyContext } from '../context/MyConext';
+import { getAuth} from "firebase/auth"
 
 const auth = getAuth()
 

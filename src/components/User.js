@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { MyContext } from './context/MyConext'
+import { MyContext } from '../context/MyConext'
 import {signOut,getAuth} from "firebase/auth"
 import "./User.css"
 import { Navigate, useNavigate } from 'react-router-dom'

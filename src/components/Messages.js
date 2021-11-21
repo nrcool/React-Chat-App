@@ -1,13 +1,13 @@
 
-import React, { useContext, useEffect } from 'react';
-import { MyContext } from './context/MyConext';
+import React, { useContext } from 'react';
+import { MyContext } from '../context/MyConext';
 import Message from './Message';
 
 
 function Messages() {
 
 
-  const {messages,setMessages,user}=useContext(MyContext)
+  const {messages,user}=useContext(MyContext)
   return (
     <div className="messages">
       {messages.map(msj=>{

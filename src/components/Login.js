@@ -7,31 +7,24 @@ import {
   createUserWithEmailAndPassword
 } from "firebase/auth";
 import {
-  collection,
-  addDoc,
   getDoc,
-  getDocs,
   doc,
   setDoc,
-  getFirestore,
-  onSnapshot,
-  Timestamp,
-  orderBy,
-  query,
+  getFirestore
 } from "firebase/firestore";
-import { MyContext } from "./context/MyConext";
-import image from "./images/chatapp.gif";
-import google from "./images/google-plus.png";
-import github from "./images/github.png";
+import { MyContext } from "../context/MyConext";
+import image from "../images/chatapp.gif";
+import google from "../images/google-plus.png";
+import github from "../images/github.png";
 import "./Login.css";
 import {BsQuestionCircle ,BsHandThumbsUp} from "react-icons/bs"
-import app from "./firebaseAuthentication/firebaseConfig";
+import app from "../firebaseAuthentication/firebaseConfig";
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 export default function Login({ auth }) {
   const [error, setError] = useState("");
-  const { user, setUser, register, setRegister } = useContext(MyContext);
+  const { setUser, register, setRegister } = useContext(MyContext);
   const db = getFirestore(app)
 
  
@@ -57,7 +50,7 @@ export default function Login({ auth }) {
           messages:[],
           uploads:[]
         }
-        const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+        await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
         localStorage.setItem("user",JSON.stringify(newUser) )
@@ -90,7 +83,7 @@ export default function Login({ auth }) {
           messages:[],
           uploads:[]
         }
-        const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+         await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
         localStorage.setItem("user",JSON.stringify(newUser) )
@@ -119,7 +112,7 @@ export default function Login({ auth }) {
           messages:[],
           uploads:[]
         }
-        const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+         await setDoc(doc(db, `users`,user.uid), newUser);
        
         setUser(newUser);
         localStorage.setItem("user",JSON.stringify(newUser) )
@@ -147,7 +140,7 @@ export default function Login({ auth }) {
           messages:[],
           uploads:[]
         }
-        const sent = await setDoc(doc(db, `users`,user.uid), newUser);
+         await setDoc(doc(db, `users`,user.uid), newUser);
         window.localStorage.setItem("user",newUser)
           setUser(newUser)})
       .catch(err=>{

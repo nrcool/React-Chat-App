@@ -6,12 +6,12 @@ export default function Message({type, userName, userImage, text, imageURL,creat
  {mymsj?    <div className="direct-chat-msg">
       
       <div className="direct-chat-info right">
-      {type==="image/jpeg"? <img src={imageURL} width="150" className="direct-chat-text-right right"/> :<div className="direct-chat-text-right">{text}</div> }
+      {type==="image/jpeg"? <img src={imageURL} width="150" className="direct-chat-text-right right" alt="uploadimage"/> :<div className="direct-chat-text-right">{text}</div> }
         {/* <span className="direct-chat-name" style={{color:"white"}}>{userName}</span> */}
         <img
         className="direct-chat-img right"
         src={userImage}
-        alt="message user image"
+        alt="message-user"
       />
       </div>
      
