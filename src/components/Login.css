@@ -24,7 +24,7 @@
     outline: none;
     padding: 10px;
     margin: 5px;
-    color: gray;
+    color: rgb(253, 244, 244);
     border-bottom: 2px solid white;
 }
 .login-form button{

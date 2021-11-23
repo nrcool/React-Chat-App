@@ -6,7 +6,7 @@
 .app{
     background-color: rgb(0, 0, 0);
     width: 100wv;
-    height: 100vh;
+    min-height: 100vh;
 }
 a{
     text-decoration: none !important;

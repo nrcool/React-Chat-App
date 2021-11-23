@@ -163,7 +163,7 @@ export default function ChatBoard() {
           <Messages />
           <span ref={boxRef}></span>
         </div>
-        <div className="user-online" style={{ color: "white" }}>
+        <div className="user-onlines" style={{ color: "white" }}>
           <Users/>
         </div>
       </div>

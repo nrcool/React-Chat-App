@@ -26,4 +26,13 @@
 .offline-user{
     filter: grayscale(80%);
     
+} 
+
+@media screen and (max-width : 680px) {
+    .online-user>p,.offline-user>p{
+        display: none;
+    }
+    .online-user,.offline-user{
+        width: 60px;
+    }
 }
