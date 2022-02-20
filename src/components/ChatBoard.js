@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import toast ,{Toaster} from "react-hot-toast"
+import Filter from "bad-words"
+import naughtyWords from "naughty-words";
+
 import {
   collection,
   addDoc,
@@ -27,6 +30,13 @@ import "./ChatBoard.css";
 import app from "../firebaseAuthentication/firebaseConfig";
 
 export default function ChatBoard() {
+  
+  const filter = new Filter()
+  let allwords=[]
+  for(let key in naughtyWords){
+    allwords.push(...naughtyWords[key])
+  }
+  filter.addWords(...allwords)
   const {setMessages, user ,setUser} = useContext(MyContext);
   const [emoji, setEmoji] = useState(false);
   const boxRef= useRef()
@@ -62,8 +72,12 @@ export default function ChatBoard() {
     return unsubscribe;
   }, []);
 
+ 
   const sendMessage = async (e) => {
     e.preventDefault();
+  
+    /* filter.removeWords(e.target.message.value); */
+    e.target.message.value= filter.clean(e.target.message.value)
     if(e.target.message.value.trim()!==""){
     let message = {
       uid: user.uid,
@@ -73,7 +87,8 @@ export default function ChatBoard() {
       createAt: Timestamp.now(),
       type:"text/plain"
     };
-    /*   const sent = await setDoc(doc(db,"messages"),message) */
+
+    /*  const sent = await setDoc(doc(db,"messages"),message)  */
     // Add a new document with a generated id.
     const sent = await addDoc(collection(db, "messages"), message);
     await setDoc(doc(db, `users`,user.uid), {...user,messages:[...user.messages,{...message,id:sent.id}]});
