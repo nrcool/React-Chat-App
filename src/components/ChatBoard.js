@@ -75,9 +75,10 @@ export default function ChatBoard() {
  
   const sendMessage = async (e) => {
     e.preventDefault();
-  
-    /* filter.removeWords(e.target.message.value); */
-    e.target.message.value= filter.clean(e.target.message.value)
+    if(e.target.message.value.length>2){
+        e.target.message.value= filter.clean(e.target.message.value.toString())
+    }
+   
     if(e.target.message.value.trim()!==""){
     let message = {
       uid: user.uid,
@@ -88,7 +89,7 @@ export default function ChatBoard() {
       type:"text/plain"
     };
 
-    /*  const sent = await setDoc(doc(db,"messages"),message)  */
+    /*  const sent = await setDoc(doc(db,"messages"),message) */ 
     // Add a new document with a generated id.
     const sent = await addDoc(collection(db, "messages"), message);
     await setDoc(doc(db, `users`,user.uid), {...user,messages:[...user.messages,{...message,id:sent.id}]});
